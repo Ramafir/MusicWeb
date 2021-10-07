@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts :: header"><title>Strona Główna</title>
+</head>
+<body>
+<br>
+<div class="container">
+    <div class="jumbotron home-jumbo">
+        <div class="container text-center text-white jumbo-container">
+            <h1 class="display-3">MusicWeb</h1>
+            <p>Welcome to the world of music!</p>
+        </div>
+    </div>
+    <br>
+<section>
+    <div class="container">
+        <div class="row" >
+            <div class="col-sm-6 col-lg-3" th:each="album: ${albums}">
+                <div class="card-wrapper mb-4">
+                    <div class="card-img"><img src="https://via.placeholder.com/240x240/000080/000000" th:src="@{${album.imgUrl}}" alt="Okładka płyty" ></div>
+                    <div class="card-body">
+                        <div>
+                            <a href="#" th:href="@{|/albums/${#strings.replace(album.name, ' ', '-')}|}"><i class="bg-light p-3 rounded-circle tooltip-arrow font-weight-600"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <h5 class="mb-0 text-primary"><a th:text="${album.artist}"  th:href="@{|/artists/${#strings.replace(album.artist.nickname, ' ', '-')}|}">Artist</a></h5>
+                    <h4 class="h5 mb-1"><a th:text="${album.name}" th:href="@{|/albums/${#strings.replace(album.name, ' ', '-')}|}" class="text-secondary">Album Name</a></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    <br>
+<div th:replace="layouts :: footer"></div>
+</div>
+</body>
+</html>
