@@ -38,8 +38,7 @@ public class User implements UserDetails {
     private String email;
     @NotNull
     private String password;
-    @Enumerated(EnumType.STRING)
-    private UserRole userRole;
+    private String userRole;
     private boolean locked;
     private boolean enabled;
 
@@ -47,19 +46,19 @@ public class User implements UserDetails {
                 String lastName,
                 String email,
                 String password,
-                UserRole appUserRole) {
+                String userRole) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.userRole = appUserRole;
+        this.userRole = userRole;
     }
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority authority =
-                new SimpleGrantedAuthority(UserRole.USER.name());
+                new SimpleGrantedAuthority(userRole);
         return Collections.singletonList(authority);
     }
 

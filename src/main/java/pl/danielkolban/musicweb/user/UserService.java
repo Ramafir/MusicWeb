@@ -32,18 +32,14 @@ public class UserService implements UserDetailsService {
                 .isPresent();
 
         if (userExists) {
-
             throw new IllegalStateException("email already taken");
+        } else {
+            user.setUserRole("USER");
+            user.setEnabled(true);
+            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+            userRepository.save(user);
         }
 
-        String encodedPassword = bCryptPasswordEncoder
-                .encode(user.getPassword());
-
-        user.setPassword(encodedPassword);
-        user.setUserRole(UserRole.USER);
-        user.setEnabled(true);
-
-        userRepository.save(user);
 
     }
 }

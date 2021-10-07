@@ -18,8 +18,15 @@
         <input type="text" class="form-control" id="inputImgUrl" th:field="${album.imgUrl}" placeholder="https://asfaltshop.pl/uploads2/photos/big/2019/03/27/20190327094918_antihype-b-iext51886621.jpg">
     </div>
     <div class="col-md-4">
-        <label for="inputState" class="form-label">Artist</label>
-        <select id="inputState" class="form-select" th:field="${album.artist}">
+        <label for="inputGenre" class="form-label">Artist</label>
+        <select id="inputGenre" class="form-select" th:field="${album.genre}">
+            <option th:each="album: ${album.genre}">Choose...
+            </option>
+        </select>
+    </div>
+    <div class="col-md-4">
+        <label for="inputArtist" class="form-label">Artist</label>
+        <select id="inputArtist" class="form-select" th:field="${album.artist}">
             <option th:each="artists: ${artist}"
                     th:value="${artists.id}"
                     th:text="${artists.nickname}"

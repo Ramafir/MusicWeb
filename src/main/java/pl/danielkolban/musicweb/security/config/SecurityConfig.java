@@ -10,8 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import pl.danielkolban.musicweb.user.UserService;
 
-import javax.sql.DataSource;
-
 @Configuration
 @EnableWebSecurity
 @AllArgsConstructor
@@ -23,15 +21,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter  {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-       http
-       .authorizeRequests()
-                .antMatchers("/artists/new").hasAnyAuthority("ADMIN")
-                .antMatchers("/artists/save").hasAnyAuthority("ADMIN")
-                .antMatchers("/albums/new").hasAnyAuthority("ADMIN")
-                .antMatchers("/albums/save").hasAnyAuthority("ADMIN")
+       http.authorizeRequests()
+                .antMatchers("/artists/new").hasAuthority("ADMIN")
+                .antMatchers("/artists/save").hasAuthority("ADMIN")
+                .antMatchers("/albums/new").hasAuthority("ADMIN")
+                .antMatchers("/albums/save").hasAuthority("ADMIN")
                 .antMatchers("/", "/**").permitAll()
-                .anyRequest()
-                .authenticated().and()
+                .and()
                 .formLogin();
     }
 
@@ -44,12 +40,3 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter  {
 
 
 }
-
-/*authorizeRequests()
-               .antMatchers("/artists/new").hasAnyAuthority("ADMIN")
-               .antMatchers("/artists/save").hasAnyAuthority("ADMIN")
-               .antMatchers("/albums/new").hasAnyAuthority("ADMIN")
-               .antMatchers("/albums/save").hasAnyAuthority("ADMIN")
-               .antMatchers("/", "/**").permitAll()
-               .and()
-               .formLogin();*/

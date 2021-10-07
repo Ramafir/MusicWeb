@@ -11,7 +11,7 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/artists")
 public class ArtistController {
-    private ArtistRepository artistRepository;
+    private final ArtistRepository artistRepository;
 
     public ArtistController(ArtistRepository artistRepository) {
         this.artistRepository = artistRepository;

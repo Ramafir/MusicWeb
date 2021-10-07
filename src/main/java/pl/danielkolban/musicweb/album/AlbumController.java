@@ -12,8 +12,8 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/albums")
 public class AlbumController {
-    private AlbumRepository albumRepository;
-    private ArtistRepository artistRepository;
+    private final AlbumRepository albumRepository;
+    private final ArtistRepository artistRepository;
 
     public AlbumController(AlbumRepository albumRepository, ArtistRepository artistRepository) {
         this.albumRepository = albumRepository;
