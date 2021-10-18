@@ -3,41 +3,61 @@
 <head th:replace="layouts :: header"></head>
 <body>
 <div class="container">
-<form th:action="@{/albums/save}" th:object="${album}" class="row g-3"  method="POST">
-    <div class="col-md-6">
-        <input type="hidden" id="inputAlbumId" th:field="${album.id}">
-        <label for="inputAlbumName" class="form-label">Nazwa Albumu</label>
-        <input type="text" class="form-control" id="inputAlbumName" th:field="${album.name}">
-    </div>
-    <div class="mb-3">
-        <label for="inputDescription" class="form-label">Description</label>
-        <textarea class="form-control" id="inputDescription" rows="7" th:field="${album.shortDescription}"></textarea>
-    </div>
-    <div class="col-12">
-        <label for="inputImgUrl" class="form-label">Cover</label>
-        <input type="text" class="form-control" id="inputImgUrl" th:field="${album.imgUrl}" placeholder="https://asfaltshop.pl/uploads2/photos/big/2019/03/27/20190327094918_antihype-b-iext51886621.jpg">
-    </div>
-    <div class="col-md-4">
-        <label for="inputGenre" class="form-label">Artist</label>
-        <select id="inputGenre" class="form-select" th:field="${album.genre}">
-            <option th:each="album: ${album.genre}">Choose...
-            </option>
-        </select>
-    </div>
-    <div class="col-md-4">
-        <label for="inputArtist" class="form-label">Artist</label>
-        <select id="inputArtist" class="form-select" th:field="${album.artist}">
-            <option th:each="artists: ${artist}"
-                    th:value="${artists.id}"
-                    th:text="${artists.nickname}"
-                    th:selected="${artists.nickname}">Choose...
-            </option>
-        </select>
-    </div>
-    <div class="col-12">
-        <button type="submit" class="btn btn-primary">Create Album</button>
-    </div>
-</form>
+    <form th:action="@{/albums/save}" th:object="${album}" class="row g-3" method="POST">
+        <div class="col-md-6">
+            <input type="hidden" id="inputAlbumId" th:field="${album.id}">
+            <label for="inputAlbumName" class="form-label">Nazwa Albumu</label>
+            <input type="text" class="form-control" id="inputAlbumName" th:field="${album.name}">
+            <p th:if="${#fields.hasErrors('name')}"
+                  th:errors="${album.name}">
+        </p>
+        </div>
+        <div class="mb-3">
+            <label for="inputDescription" class="form-label">Description</label>
+            <textarea class="form-control" id="inputDescription" rows="7"
+                      th:field="${album.shortDescription}"></textarea>
+            <p th:if="${#fields.hasErrors('shortDescription')}"
+                  th:errors="${album.shortDescription}">
+        </p>
+        </div>
+        <div class="col-12">
+            <label for="inputImgUrl" class="form-label">Cover</label>
+            <input type="text" class="form-control" id="inputImgUrl" th:field="${album.imgUrl}"
+                   placeholder="https://asfaltshop.pl/uploads2/photos/big/2019/03/27/20190327094918_antihype-b-iext51886621.jpg">
+            <p th:if="${#fields.hasErrors('imgUrl')}"
+                  th:errors="${album.imgUrl}">
+        </p>
+        </div>
+        <div class="col-md-4">
+            <label for="inputGenre" class="form-label">Genre</label>
+            <select id="inputGenre" class="form-select" th:field="${album.genre}">
+                <option th:each="genre : ${T(pl.danielkolban.musicweb.album.AlbumGenre).values()}"
+                        th:value="${genre}"
+                        th:text="${genre}"
+                        th:selected="${genre}">Choose...
+                </option>
+            </select>
+            <p th:if="${#fields.hasErrors('genre')}"
+                  th:errors="${album.genre}">
+        </p>
+        </div>
+        <div class="col-md-4">
+            <label for="inputArtist" class="form-label">Artist</label>
+            <select id="inputArtist" class="form-select" th:field="${album.artist}">
+                <option th:each="artists: ${artist}"
+                        th:value="${artists.id}"
+                        th:text="${artists.nickname}"
+                        th:selected="${artists.nickname}">Choose...
+                </option>
+            </select>
+            <p th:if="${#fields.hasErrors('artist')}"
+                  th:errors="${album.artist}">
+        </p>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Create Album</button>
+        </div>
+    </form>
 </div>
 </body>
 </html>

@@ -9,18 +9,30 @@
             <input type="hidden" id="inputAlbumId" th:field="${user.id}">
             <label for="inputUserFirstName" class="form-label">First Name</label>
             <input type="text" class="form-control" id="inputUserFirstName" th:field="${user.firstName}">
+            <span th:if="${#fields.hasErrors('firstName')}"
+                  th:errors="${user.firstName}">
+        </span>
         </div>
         <div class="col-md-6">
             <label for="inputUserLastName" class="form-label">Last Name</label>
             <input type="text" class="form-control" id="inputUserLastName" th:field="${user.lastName}">
+            <span th:if="${#fields.hasErrors('lastName')}"
+                  th:errors="${user.lastName}">
+        </span>
         </div>
         <div class="col-md-6">
             <label for="inputUserEmail" class="form-label">E-mail</label>
             <input type="email" class="form-control" id="inputUserEmail" th:field="${user.email}">
+            <span th:if="${#fields.hasErrors('email')}"
+                  th:errors="${user.email}">
+        </span>
         </div>
         <div class="col-md-6">
             <label for="inputArtistNickname" class="form-label">Password</label>
             <input type="password" class="form-control" id="inputArtistNickname" th:field="${user.password}">
+            <span th:if="${#fields.hasErrors('password')}"
+                  th:errors="${user.password}">
+        </span>
         </div>
         <div class="col-12">
             <button type="submit" class="btn btn-primary">Create Account</button>

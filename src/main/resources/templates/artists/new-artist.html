@@ -8,22 +8,37 @@
             <input type="hidden" id="inputAlbumId" th:field="${artist.id}">
             <label for="inputArtistFirstName" class="form-label">First Name</label>
             <input type="text" class="form-control" id="inputArtistFirstName" th:field="${artist.firstName}">
+            <span th:if="${#fields.hasErrors('firstName')}"
+                  th:errors="${artist.firstName}">
+        </span>
         </div>
         <div class="col-md-6">
             <label for="inputArtistLastName" class="form-label">Last Name</label>
             <input type="text" class="form-control" id="inputArtistLastName" th:field="${artist.lastName}">
+            <span th:if="${#fields.hasErrors('lastName')}"
+                  th:errors="${artist.lastName}">
+        </span>
         </div>
         <div class="col-md-6">
             <label for="inputArtistNickname" class="form-label">Nickname</label>
             <input type="text" class="form-control" id="inputArtistNickname" th:field="${artist.nickname}">
+            <span th:if="${#fields.hasErrors('nickname')}"
+                  th:errors="${artist.nickname}">
+        </span>
         </div>
         <div class="mb-3">
             <label for="inputDescription" class="form-label">Bio</label>
             <textarea class="form-control" id="inputDescription" rows="7" th:field="${artist.bio}"></textarea>
+            <span th:if="${#fields.hasErrors('bio')}"
+                  th:errors="${artist.bio}">
+        </span>
         </div>
         <div class="col-12">
             <label for="inputImgUrl" class="form-label">Artist Image</label>
             <input type="text" class="form-control" id="inputImgUrl" th:field="${artist.imgUrl}" placeholder="https://asfaltshop.pl/uploads2/photos/big/2019/03/27/20190327094918_antihype-b-iext51886621.jpg">
+            <span th:if="${#fields.hasErrors('imgUrl')}"
+                  th:errors="${artist.imgUrl}">
+        </span>
         </div>
         <div class="col-12">
             <button type="submit" class="btn btn-primary">Create Artist</button>

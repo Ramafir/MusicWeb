@@ -1,10 +1,10 @@
 package pl.danielkolban.musicweb.artist;
 
-import com.sun.istack.NotNull;
-import org.hibernate.annotations.BatchSize;
 import pl.danielkolban.musicweb.album.Album;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.Objects;
 
@@ -13,13 +13,20 @@ public class Artist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank
+    @Size(min = 2, max = 50)
     private String firstName;
+    @NotBlank
+    @Size(min = 2, max = 50)
     private String lastName;
+    @Size(min = 2, max = 50)
     private String nickname;
     @OneToMany(mappedBy = "artist")
     private List<Album> albums;
+    @NotBlank
     private String imgUrl;
-    @NotNull
+    @NotBlank
+    @Size(min = 2, max = 1000)
     private String bio;
 
     public Artist(String firstName, String lastName, String nickname, List<Album> albums, String imgUrl, String bio) {

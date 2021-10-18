@@ -2,9 +2,11 @@ package pl.danielkolban.musicweb.artist;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import pl.danielkolban.musicweb.album.Album;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,7 +39,10 @@ public class ArtistController {
     }
 
     @PostMapping("/save")
-    public String createArtist(Artist artist, Model model) {
+    public String createArtist(@Valid Artist artist, Model model, Errors errors) {
+        if (errors.hasErrors()) {
+            return "artists/new-artist";
+        }
         artistRepository.save(artist);
         return "redirect:/artists";
 

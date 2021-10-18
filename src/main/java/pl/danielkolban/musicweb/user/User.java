@@ -1,6 +1,5 @@
 package pl.danielkolban.musicweb.user;
 
-import com.sun.istack.NotNull;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +9,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -30,13 +32,16 @@ public class User implements UserDetails {
             generator = "user_sequence"
     )
     private long id;
-    @NotNull
+    @NotBlank(message = "*Must be a first name")
+    @Size(min = 2, max = 50)
     private String firstName;
-    @NotNull
+    @NotBlank(message = "*Must be a last name")
+    @Size(min = 2, max = 50)
     private String lastName;
-    @NotNull
+    @NotBlank(message = "*Must be a valid E-Mail address")
+    @Email
+    @Size(min = 2, max = 50)
     private String email;
-    @NotNull
     private String password;
     private String userRole;
     private boolean locked;
